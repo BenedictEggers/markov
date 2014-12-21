@@ -28,7 +28,7 @@ class MarkovNode:
         return self.children[random.randint(0, len(self.children) - 1)]
 
 
-class Markov:
+class Chain:
     def __init__(self):
         self.start = MarkovNode("")
         self.nodes = {}
@@ -56,4 +56,4 @@ class Markov:
             current = self.nodes[current].next()
             sentence += current + " "
 
-        return sentence[:-2] + sentence[-1]
+        return sentence[:-3] + sentence[-2]
