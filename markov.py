@@ -25,7 +25,7 @@ class MarkovNode:
         return self.children != []
 
     def next(self):
-        return self.children[random.randint(len(self.children) - 1)]
+        return self.children[random.randint(0, len(self.children) - 1)]
 
 
 class Markov:
@@ -47,13 +47,13 @@ class Markov:
 
         self.add_word("", sent[0])
         for i in xrange(len(sent) - 1):
-            add_word(sent[i], sent[i + 1])
+            self.add_word(sent[i], sent[i + 1])
 
     def generate(self):
         sentence = ""
-        current = self.start
-        while self.nodes(current).has_next():
+        current = ""
+        while self.nodes[current].has_next():
             current = self.nodes[current].next()
             sentence += current + " "
 
-        return sentence[:-1]
+        return sentence[:-2] + sentence[-1]
