@@ -57,3 +57,6 @@ class Chain:
             sentence += current + " "
 
         return sentence[:-3] + sentence[-2]
+
+    def clear(self):
+        self.nodes = {}
