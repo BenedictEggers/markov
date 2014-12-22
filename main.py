@@ -15,19 +15,19 @@ def main():
         if action is 'g':
             times = int(raw_input("How many sentences would you like to generate? "))
             for _ in xrange(times):
-                c.generate()
+                print c.generate()
         elif action is 't':
             train(c)
         elif action is 'c':
             c.clear()
         else:
-            print "I don't recognize that"
+            print "I don't recognize that."
 
         action = get_action()
 
 
 def get_action():
-    return raw_input("Would you like to (g)enerae, (t)rain, (c)lear, or (q)uit? ")
+    return raw_input("Would you like to (g)enerate, (t)rain, (c)lear, or (q)uit? ")
 
 
 def train(c):
