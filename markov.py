@@ -61,11 +61,12 @@ class Chain:
             # One-word sentence
             return current
 
+        sentence += current
         while self.nodes[current].has_next():
-            sentence += " " + current
             current = self.nodes[current].next()
+            sentence += " " + current
 
-        return sentence[1:] + current
+        return sentence
 
 
     def clear(self):
