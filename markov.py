@@ -29,34 +29,45 @@ class MarkovNode:
 
 
 class Chain:
+
     def __init__(self):
         self.start = MarkovNode("")
         self.nodes = {}
 
-    def add_word(self, parent, next):
-        if parent not in self.nodes:
-            self.nodes[parent] = MarkovNode(parent)
-        if next not in self.nodes:
-            self.nodes[next] = MarkovNode(next)
-        self.nodes[parent].add_child(next)
 
     def add_sentence(self, sent):
-        if "" in sent:
-            # Error handling? Nahhhhh
+        if len(sent) is 0:
             return
 
-        self.add_word("", sent[0])
+        self.start.add_child(sent[0])
         for i in xrange(len(sent) - 1):
-            self.add_word(sent[i], sent[i + 1])
+            if sent[i] not in self.nodes:
+                self.nodes[sent[i]] = MarkovNode(sent[i])
+            self.nodes[sent[i]].add_child(sent[i + 1])
+
+        if not sent[-1] in self.nodes:
+            self.nodes[sent[-1]] = MarkovNode(sent[-1])
+
 
     def generate(self):
         sentence = ""
-        current = ""
-        while self.nodes[current].has_next():
-            current = self.nodes[current].next()
-            sentence += current + " "
 
-        return sentence[:-3] + sentence[-2]
+        if not self.start.has_next():
+            # Hasn't been trained yet
+            return ""
+
+        current = self.start.next()
+        if not self.nodes[current].has_next():
+            # One-word sentence
+            return current
+
+        while self.nodes[current].has_next():
+            sentence += " " + current
+            current = self.nodes[current].next()
+
+        return sentence[1:] + current
+
 
     def clear(self):
         self.nodes = {}
+
