@@ -1,1 +1,1 @@
-Learning about Markov Chains the only way I know how to learn anything--by implementing one. Included are some fun files to train on.
+Learning about Markov Chains the only way I know how to learn anything--by implementing one. Included are some fun files to train on. They have weird punctiation and spacing so sometimes the "sentences" produced from them are more like poems. But that's pretty okay.
